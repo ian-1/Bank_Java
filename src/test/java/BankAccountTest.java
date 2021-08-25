@@ -17,4 +17,12 @@ public class BankAccountTest {
         double result = subject.getBalance();
         assertEquals(100, result);
     }
+
+    @Test
+    void testCanMakeWithdrawal() {
+        BankAccount subject = new BankAccount();
+        subject.withdraw(50);
+        double result = subject.getBalance();
+        assertEquals(-50, result);
+    }
 }
