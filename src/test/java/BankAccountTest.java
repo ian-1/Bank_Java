@@ -35,4 +35,12 @@ public class BankAccountTest {
         double result = subject.getBalance();
         assertEquals(-50, result);
     }
+
+    @Test
+    void testCanMakeWithdrawalWithDate() {
+        BankAccount subject = new BankAccount();
+        subject.withdraw(9.99, LocalDate.of(1999, 12, 31));
+        double result = subject.getBalance();
+        assertEquals(-9.99, result);
+    }
 }

@@ -19,7 +19,11 @@ public class BankAccount {
         deposit(amount, LocalDate.now());
     }
 
-    public void withdraw(double amount) {
+    public void withdraw(double amount, LocalDate date) {
         this.balance -= amount;
+    }
+
+    public void withdraw(double amount) {
+        withdraw(amount, LocalDate.now());
     }
 }
