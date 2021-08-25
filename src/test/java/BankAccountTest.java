@@ -9,4 +9,12 @@ public class BankAccountTest {
         double result = subject.getBalance();
         assertEquals(0, result);
     }
+
+    @Test
+    void testCanMakeDeposit() {
+        BankAccount subject = new BankAccount();
+        subject.deposit(100);
+        double result = subject.getBalance();
+        assertEquals(100, result);
+    }
 }
