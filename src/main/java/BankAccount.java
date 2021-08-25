@@ -26,4 +26,8 @@ public class BankAccount {
     public void withdraw(double amount) {
         withdraw(amount, LocalDate.now());
     }
+
+    public String generateStatement() {
+        return "date || credit || debit || balance";
+    }
 }

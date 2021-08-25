@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BankAccountTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-08-25T15:22:33" hostname="Ians-MacBook-Air.local" time="0.089">
+<testsuite name="BankAccountTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-08-25T15:30:45" hostname="Ians-MacBook-Air.local" time="0.061">
   <properties/>
-  <testcase name="testCanMakeWithdrawalWithDate()" classname="BankAccountTest" time="0.056"/>
-  <testcase name="testCanMakeDeposit()" classname="BankAccountTest" time="0.017"/>
-  <testcase name="testNewAccountsHaveZeroBalance()" classname="BankAccountTest" time="0.002"/>
-  <testcase name="testCanMakeWithdrawal()" classname="BankAccountTest" time="0.004"/>
-  <testcase name="testCanMakeDepositWithDate()" classname="BankAccountTest" time="0.001"/>
+  <testcase name="testCanMakeWithdrawalWithDate()" classname="BankAccountTest" time="0.033"/>
+  <testcase name="testCanMakeDeposit()" classname="BankAccountTest" time="0.014"/>
+  <testcase name="testCanGenerateBlankStatement()" classname="BankAccountTest" time="0.001"/>
+  <testcase name="testNewAccountsHaveZeroBalance()" classname="BankAccountTest" time="0.001"/>
+  <testcase name="testCanMakeWithdrawal()" classname="BankAccountTest" time="0.001"/>
+  <testcase name="testCanMakeDepositWithDate()" classname="BankAccountTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

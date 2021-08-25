@@ -43,4 +43,12 @@ public class BankAccountTest {
         double result = subject.getBalance();
         assertEquals(-9.99, result);
     }
+
+    @Test
+    void testCanGenerateBlankStatement() {
+        BankAccount subject = new BankAccount();
+        String result = subject.generateStatement();
+        String expected = "date || credit || debit || balance";
+        assertEquals(expected, result);
+    }
 }
