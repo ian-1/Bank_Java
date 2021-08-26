@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class BankAccount {
     private double balance;
 
-    public void bankAccount() {
+    public BankAccount() {
         balance = 0;
     }
 
