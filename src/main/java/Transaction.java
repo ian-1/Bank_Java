@@ -5,12 +5,12 @@ public class Transaction {
     private double credit;
     private double debit;
 
-    public Transaction(LocalDate date, double amount, String type) {
+    public Transaction(LocalDate date, double amount, TransactionType type) {
         this.date = date;
-        if (type == "credit") {
+        if (type == TransactionType.CREDIT) {
             this.credit = amount;
             this.debit = 0;
-        } else if (type == "debit") {
+        } else if (type == TransactionType.DEBIT) {
             this.credit = 0;
             this.debit = amount;
         }

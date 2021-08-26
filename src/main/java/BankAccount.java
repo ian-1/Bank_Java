@@ -1,30 +1,30 @@
+import java.awt.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BankAccount {
-    private double balance;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
-    public BankAccount() {
-        balance = 0;
+    public ArrayList getTransactions() {
+        return this.transactions;
     }
 
-    public double getBalance() {
-        return this.balance;
-    }
-
-    public void deposit(double amount, LocalDate date) {
-        this.balance += amount;
+    public void deposit(LocalDate date, double amount) {
+        Transaction transaction = new Transaction(date, amount, TransactionType.CREDIT);
+        this.transactions.add(transaction);
     }
 
     public void deposit(double amount) {
-        deposit(amount, LocalDate.now());
+        deposit(LocalDate.now(), amount);
     }
 
-    public void withdraw(double amount, LocalDate date) {
-        this.balance -= amount;
+    public void withdraw(LocalDate date, double amount) {
+        Transaction transaction = new Transaction(date, amount, TransactionType.DEBIT);
+        this.transactions.add(transaction);
     }
 
     public void withdraw(double amount) {
-        withdraw(amount, LocalDate.now());
+        withdraw(LocalDate.now(), amount);
     }
 
     public String generateStatement() {

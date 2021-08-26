@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,10 +20,18 @@ public class BankAccountTest {
     @DisplayName("New Accounts")
     public class NewAccounts {
         @Test
-        @DisplayName("New accounts have zero balance")
+        @DisplayName("New accounts have no transactions")
         void testNewAccountsHaveZeroBalance() {
-            double result = subject.getBalance();
-            assertEquals(0, result);
+            ArrayList transactions = subject.getTransactions();
+            assertEquals(0, transactions.size());
+        }
+
+        @Test
+        @DisplayName("Can generate blank statement")
+        void testCanGenerateBlankStatement() {
+            String result = subject.generateStatement();
+            String expected = "date || credit || debit || balance";
+            assertEquals(expected, result);
         }
     }
 
@@ -33,16 +42,21 @@ public class BankAccountTest {
         @DisplayName("Can make deposit")
         void testCanMakeDeposit() {
             subject.deposit(100);
-            double result = subject.getBalance();
-            assertEquals(100, result);
+            ArrayList transactions = subject.getTransactions();
+            Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
+            double credit = transaction.getCredit();
+            assertEquals(100, credit);
         }
 
         @Test
         @DisplayName("Can make deposit with date")
         void testCanMakeDepositWithDate() {
-            subject.deposit(25.10, LocalDate.of(2021, 1, 1));
-            double result = subject.getBalance();
-            assertEquals(25.10, result);
+            LocalDate date = LocalDate.of(2021, 1, 1);
+            subject.deposit(date, 25.10);
+            ArrayList transactions = subject.getTransactions();
+            Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
+            LocalDate recordedDate = transaction.getDate();
+            assertEquals(date, recordedDate);
         }
     }
 
@@ -53,28 +67,21 @@ public class BankAccountTest {
         @DisplayName("Can make withdrawal")
         void testCanMakeWithdrawal() {
             subject.withdraw(50);
-            double result = subject.getBalance();
-            assertEquals(-50, result);
+            ArrayList transactions = subject.getTransactions();
+            Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
+            double debit = transaction.getDebit();
+            assertEquals(50, debit);
         }
 
         @Test
         @DisplayName("Can make withdrawal with date")
         void testCanMakeWithdrawalWithDate() {
-            subject.withdraw(9.99, LocalDate.of(1999, 12, 31));
-            double result = subject.getBalance();
-            assertEquals(-9.99, result);
-        }
-    }
-
-    @Nested
-    @DisplayName("Statements")
-    public class Statements {
-        @Test
-        @DisplayName("Can generate blank statement")
-        void testCanGenerateBlankStatement() {
-            String result = subject.generateStatement();
-            String expected = "date || credit || debit || balance";
-            assertEquals(expected, result);
+            LocalDate date = LocalDate.of(1999, 12, 31);
+            subject.withdraw(date, 9.99);
+            ArrayList transactions = subject.getTransactions();
+            Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
+            LocalDate recordedDate = transaction.getDate();
+            assertEquals(date, recordedDate);
         }
     }
 }
