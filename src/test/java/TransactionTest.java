@@ -1,24 +1,66 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TransactionTest {
+    private Transaction subject;
+    private LocalDate date;
 
-    @Test
-    void testCanMakeCreditTransaction() {
-        LocalDate date = LocalDate.of(1990, 1, 1);
-        Transaction subject = new Transaction(date, 30.15);
-        assertEquals(date, subject.getDate());
-        assertEquals(30.15, subject.getCredit());
+    @Nested
+    @DisplayName("Credit")
+    public class WhenCredit {
+        @BeforeEach
+        public void setup() {
+            date = LocalDate.of(1990, 1, 1);
+            subject = new Transaction(date, 30.15, "credit");
+        }
+
+        @Test
+        @DisplayName("Can make credit transaction")
+        void testCanMakeCreditTransaction() {
+            assertEquals(30.15, subject.getCredit());
+        }
+
+        @Test
+        @DisplayName("Credit transaction holds date")
+        void testCreditTransactionHoldsDate() {
+            assertEquals(date, subject.getDate());
+        }
+
+        @Test
+        @DisplayName("Credit transaction has zero debit")
+        void testCreditTransactionHasZeroDebit() {
+            assertEquals(0, subject.getDebit());
+        }
     }
 
-    @Test
-    void testCanMakeDebitTransaction() {
-        LocalDate date = LocalDate.of(1995, 6, 15);
-        Transaction subject = new Transaction(date, 6452.78, "debit");
-        assertEquals(6452.78, subject.getDebit());
+    @Nested
+    @DisplayName("Debit")
+    public class WhenDebit {
+        @BeforeEach
+        public void setup() {
+            date = LocalDate.of(1995, 6, 15);
+            subject = new Transaction(date, 6452.78, "debit");
+        }
+
+        @Test
+        @DisplayName("Can make debit transaction")
+        void testCanMakeDebitTransaction() {
+            assertEquals(6452.78, subject.getDebit());
+        }
+
+        @Test
+        @DisplayName("Debit transaction holds date")
+        void testDebitTransactionHoldsDate() {
+            assertEquals(date, subject.getDate());
+        }
+
+        @Test
+        @DisplayName("Debit transaction has zero credit")
+        void testdebitTransactionHasZeroCredit() {
+            assertEquals(6452.78, subject.getDebit());
+        }
     }
 }
