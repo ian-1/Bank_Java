@@ -14,4 +14,11 @@ public class TransactionTest {
         assertEquals(date, subject.getDate());
         assertEquals(30.15, subject.getCredit());
     }
+
+    @Test
+    void testCanMakeDebitTransaction() {
+        LocalDate date = LocalDate.of(1995, 6, 15);
+        Transaction subject = new Transaction(date, 6452.78, "debit");
+        assertEquals(6452.78, subject.getDebit());
+    }
 }
