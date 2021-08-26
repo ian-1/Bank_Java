@@ -2,18 +2,18 @@ import java.time.LocalDate;
 
 public class Transaction {
     private LocalDate date;
-    private double debit;
+    private double credit;
 
     public Transaction(LocalDate date, double amount) {
         this.date = date;
-        this.debit = amount;
+        this.credit = amount;
     }
 
     public LocalDate getDate() {
         return this.date;
     }
 
-    public double getDebit() {
-        return this.debit;
+    public double getCredit() {
+        return this.credit;
     }
 }
