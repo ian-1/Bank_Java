@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Credit" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-08-27T10:44:11" hostname="Ians-MacBook-Air.local" time="0.008">
-  <properties/>
-  <testcase name="Can make credit transaction" classname="TransactionTest$WhenCredit" time="0.001"/>
-  <testcase name="Credit transaction has zero debit" classname="TransactionTest$WhenCredit" time="0.003"/>
-  <testcase name="Credit transaction holds date" classname="TransactionTest$WhenCredit" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
