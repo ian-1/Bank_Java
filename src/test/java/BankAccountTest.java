@@ -52,7 +52,7 @@ public class BankAccountTest {
         @DisplayName("Can make deposit with date")
         void testCanMakeDepositWithDate() {
             LocalDate date = LocalDate.of(2021, 1, 1);
-            subject.deposit(date, 25.10);
+            subject.deposit(25.10, date);
             ArrayList transactions = subject.getTransactions();
             Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
             LocalDate recordedDate = transaction.getDate();
@@ -77,7 +77,7 @@ public class BankAccountTest {
         @DisplayName("Can make withdrawal with date")
         void testCanMakeWithdrawalWithDate() {
             LocalDate date = LocalDate.of(1999, 12, 31);
-            subject.withdraw(date, 9.99);
+            subject.withdraw(9.99, date);
             ArrayList transactions = subject.getTransactions();
             Transaction transaction = (Transaction) transactions.get(transactions.size() - 1);
             LocalDate recordedDate = transaction.getDate();

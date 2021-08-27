@@ -14,7 +14,7 @@ public class TransactionTest {
         @BeforeEach
         public void setup() {
             date = LocalDate.of(1990, 1, 1);
-            subject = new Transaction(date, 30.15, TransactionType.CREDIT);
+            subject = new Transaction(30.15, TransactionType.CREDIT, date);
         }
 
         @Test
@@ -42,7 +42,7 @@ public class TransactionTest {
         @BeforeEach
         public void setup() {
             date = LocalDate.of(1995, 6, 15);
-            subject = new Transaction(date, 6452.78, TransactionType.DEBIT);
+            subject = new Transaction(6452.78, TransactionType.DEBIT, date);
         }
 
         @Test

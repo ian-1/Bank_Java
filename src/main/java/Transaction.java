@@ -5,7 +5,7 @@ public class Transaction {
     private double credit;
     private double debit;
 
-    public Transaction(LocalDate date, double amount, TransactionType type) {
+    public Transaction(double amount, TransactionType type, LocalDate date) {
         this.date = date;
         if (type == TransactionType.CREDIT) {
             this.credit = amount;

@@ -9,22 +9,22 @@ public class BankAccount {
         return this.transactions;
     }
 
-    public void deposit(LocalDate date, double amount) {
-        Transaction transaction = new Transaction(date, amount, TransactionType.CREDIT);
+    public void deposit(double amount, LocalDate date) {
+        Transaction transaction = new Transaction(amount, TransactionType.CREDIT, date);
         this.transactions.add(transaction);
     }
 
     public void deposit(double amount) {
-        deposit(LocalDate.now(), amount);
+        deposit(amount, LocalDate.now());
     }
 
-    public void withdraw(LocalDate date, double amount) {
-        Transaction transaction = new Transaction(date, amount, TransactionType.DEBIT);
+    public void withdraw(double amount, LocalDate date) {
+        Transaction transaction = new Transaction(amount, TransactionType.DEBIT, date);
         this.transactions.add(transaction);
     }
 
     public void withdraw(double amount) {
-        withdraw(LocalDate.now(), amount);
+        withdraw(amount, LocalDate.now());
     }
 
     public String generateStatement() {
