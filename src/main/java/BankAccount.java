@@ -28,6 +28,7 @@ public class BankAccount {
     }
 
     public String generateStatement() {
-        return "date || credit || debit || balance";
+        StatementPrinter printer = new StatementPrinter();
+        return printer.print(transactions);
     }
 }

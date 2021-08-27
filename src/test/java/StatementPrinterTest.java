@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StatementPrinterTest {
@@ -21,5 +22,18 @@ public class StatementPrinterTest {
     void TestPrintsBlankStatement() {
         String result = subject.print(transactions);
         assertEquals("date || credit || debit || balance", result);
+    }
+
+    @Test
+    @DisplayName("Prints statement for one transaction")
+    void TestPrintsStatementForOneTransaction() {
+        LocalDate date = LocalDate.of(2000,1,1);
+        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
+        transactions.add(transaction);
+        String result = subject.print(transactions);
+        String lineOne = "date || credit || debit || balance\n";
+        String lineTwo = "01/01/2000 || 1.00 || - || 1.00";
+        String expectation = lineOne + lineTwo;
+        assertEquals(expectation, result);
     }
 }
