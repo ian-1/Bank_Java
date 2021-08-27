@@ -23,8 +23,10 @@ public class StatementPrinter {
         line += "\n";
         line += britDate(transaction);
         line += " || ";
-        line += String.format("%.2f", transaction.getCredit());
-        line += " || - || ";
+        line += zeroToDash(transaction.getCredit());
+        line += " || ";
+        line += zeroToDash(transaction.getDebit());
+        line += " || ";
         line += String.format("%.2f", balance);
         return line;
     }
@@ -33,6 +35,7 @@ public class StatementPrinter {
         double balance = 0;
         for (int i = sortedTransactions.size() - 1; i >= index; i--) {
             balance += sortedTransactions.get(i).getCredit();
+            balance -= sortedTransactions.get(i).getDebit();
         }
         return balance;
     }
@@ -52,6 +55,14 @@ public class StatementPrinter {
             return "0" + number;
         } else {
             return number;
+        }
+    }
+
+    private String zeroToDash(double amount) {
+        if (amount == 0) {
+            return "-";
+        } else {
+            return String.format("%.2f", amount);
         }
     }
 
