@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="StatementPrinterTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-08-30T16:47:42" hostname="Ians-MacBook-Air.local" time="0.086">
+<testsuite name="StatementPrinterTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-08-30T20:01:23" hostname="Ians-MacBook-Air.local" time="0.094">
   <properties/>
-  <testcase name="Prints statement for two credit transactions" classname="StatementPrinterTest" time="0.071"/>
+  <testcase name="Prints statement for two credit transactions" classname="StatementPrinterTest" time="0.077"/>
   <testcase name="Prints statement for credit and debit transactions" classname="StatementPrinterTest" time="0.003"/>
-  <testcase name="Prints statement twice" classname="StatementPrinterTest" time="0.003"/>
-  <testcase name="Prints blank statement" classname="StatementPrinterTest" time="0.001"/>
-  <testcase name="Prints statement for a credit transaction" classname="StatementPrinterTest" time="0.001"/>
+  <testcase name="Prints statement twice" classname="StatementPrinterTest" time="0.004"/>
+  <testcase name="Prints blank statement" classname="StatementPrinterTest" time="0.002"/>
+  <testcase name="Prints statement for a credit transaction" classname="StatementPrinterTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

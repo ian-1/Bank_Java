@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class StatementPrinterTest {
     private StatementPrinter subject;
-    private ArrayList<Transaction> transactions;
+    private ArrayList<ITransaction> transactions;
 
     @BeforeEach
     void setup() {
@@ -28,11 +28,11 @@ public class StatementPrinterTest {
     @DisplayName("Prints statement for a credit transaction")
     void TestPrintsStatementForACreditTransaction() {
         LocalDate date = LocalDate.of(2000,1,1);
-        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
-        transactions.add(transaction);
+        MockCreditTransaction mockTransaction = new MockCreditTransaction();
+        transactions.add(mockTransaction);
         String result = subject.print(transactions);
         String lineOne = "date || credit || debit || balance\n";
-        String lineTwo = "01/01/2000 || 1.00 || - || 1.00";
+        String lineTwo = "01/01/2000 || 100.00 || - || 100.00";
         String expectation = lineOne + lineTwo;
         assertEquals(expectation, result);
     }
@@ -41,10 +41,10 @@ public class StatementPrinterTest {
     @DisplayName("Prints statement twice")
     void TestPrintsStatementTwice() {
         LocalDate date = LocalDate.of(2000,1,1);
-        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
-        transactions.add(transaction);
+        MockCreditTransaction mockTransaction = new MockCreditTransaction();
+        transactions.add(mockTransaction);
         String lineOne = "date || credit || debit || balance\n";
-        String lineTwo = "01/01/2000 || 1.00 || - || 1.00";
+        String lineTwo = "01/01/2000 || 100.00 || - || 100.00";
         String expectation = lineOne + lineTwo;
         String result = subject.print(transactions);
         assertEquals(expectation, result);
@@ -56,15 +56,15 @@ public class StatementPrinterTest {
     @DisplayName("Prints statement for two credit transactions")
     void TestPrintsStatementForTwoCreditTransactions() {
         LocalDate date = LocalDate.of(2000,1,1);
-        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
-        transactions.add(transaction);
+        MockCreditTransaction mockTransaction = new MockCreditTransaction();
+        transactions.add(mockTransaction);
         LocalDate dateTwo = LocalDate.of(2000,1,2);
-        Transaction transactionTwo = new Transaction(101,TransactionType.CREDIT, dateTwo);
-        transactions.add(transactionTwo);
+        MockCreditTransactionTwo mockTransactionTwo = new MockCreditTransactionTwo();
+        transactions.add(mockTransactionTwo);
         String result = subject.print(transactions);
         String lineOne = "date || credit || debit || balance\n";
-        String lineTwo = "02/01/2000 || 101.00 || - || 102.00\n";
-        String lineThree = "01/01/2000 || 1.00 || - || 1.00";
+        String lineTwo = "03/01/2000 || 25.00 || - || 125.00\n";
+        String lineThree = "01/01/2000 || 100.00 || - || 100.00";
         String expectation = lineOne + lineTwo + lineThree;
         assertEquals(expectation, result);
     }
@@ -72,21 +72,69 @@ public class StatementPrinterTest {
     @Test
     @DisplayName("Prints statement for credit and debit transactions")
     void TestPrintsStatementForCreditAndDebitTransactions() {
-        LocalDate date = LocalDate.of(2000,1,1);
-        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
-        transactions.add(transaction);
-        LocalDate dateTwo = LocalDate.of(2000,1,2);
-        Transaction transactionTwo = new Transaction(0.50,TransactionType.DEBIT, dateTwo);
-        transactions.add(transactionTwo);
-        LocalDate dateThree = LocalDate.of(2000,1,3);
-        Transaction transactionThree = new Transaction(101,TransactionType.CREDIT, dateThree);
-        transactions.add(transactionThree);
+        MockCreditTransaction mockTransaction = new MockCreditTransaction();
+        transactions.add(mockTransaction);
+        MockDebitTransaction mockTransactionTwo = new MockDebitTransaction();
+        transactions.add(mockTransactionTwo);
+        MockCreditTransactionTwo mockTransactionThree = new MockCreditTransactionTwo();
+        transactions.add(mockTransactionThree);
         String result = subject.print(transactions);
         String lineOne = "date || credit || debit || balance\n";
-        String lineTwo = "03/01/2000 || 101.00 || - || 101.50\n";
-        String lineThree = "02/01/2000 || - || 0.50 || 0.50\n";
-        String lineFour = "01/01/2000 || 1.00 || - || 1.00";
+        String lineTwo = "03/01/2000 || 25.00 || - || 75.00\n";
+        String lineThree = "02/01/2000 || - || 50.00 || 50.00\n";
+        String lineFour = "01/01/2000 || 100.00 || - || 100.00";
         String expectation = lineOne + lineTwo + lineThree + lineFour;
         assertEquals(expectation, result);
+    }
+
+    private class MockCreditTransaction implements ITransaction {
+        @Override
+        public LocalDate getDate() {
+            return LocalDate.of(2000,1,1);
+        }
+
+        @Override
+        public double getCredit() {
+            return 100;
+        }
+
+        @Override
+        public double getDebit() {
+            return 0;
+        }
+    }
+
+    private class MockCreditTransactionTwo implements ITransaction {
+        @Override
+        public LocalDate getDate() {
+            return LocalDate.of(2000,1,3);
+        }
+
+        @Override
+        public double getCredit() {
+            return 25;
+        }
+
+        @Override
+        public double getDebit() {
+            return 0;
+        }
+    }
+
+    private class MockDebitTransaction implements ITransaction {
+        @Override
+        public LocalDate getDate() {
+            return LocalDate.of(2000,1,2);
+        }
+
+        @Override
+        public double getCredit() {
+            return 0;
+        }
+
+        @Override
+        public double getDebit() {
+            return 50;
+        }
     }
 }

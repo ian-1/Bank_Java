@@ -9,20 +9,20 @@ public class StatementPrinter {
         lines = new ArrayList<>();
     }
 
-    public String print(ArrayList<Transaction> transactions) {
+    public String print(ArrayList<ITransaction> transactions) {
         lines = fillLines(transactions);
         String combinedLines = combineLines(lines);
         lines.clear();
         return combinedLines;
     }
 
-    private ArrayList<String> fillLines(ArrayList<Transaction> transactions) {
+    private ArrayList<String> fillLines(ArrayList<ITransaction> transactions) {
         ArrayList<String> returnLines = new ArrayList<>();
         returnLines.add(HEADER);
         if (!transactions.isEmpty()) {
-            ArrayList<Transaction> sortedTransactions = sort(transactions);
+            ArrayList<ITransaction> sortedTransactions = sort(transactions);
             int i = 0;
-            for (Transaction transaction : sortedTransactions) {
+            for (ITransaction transaction : sortedTransactions) {
                 double balance = getBalance(i, sortedTransactions);
                 returnLines.add(line(transaction, balance));
                 i += 1;
@@ -31,8 +31,8 @@ public class StatementPrinter {
         return returnLines;
     }
 
-    private String line(Transaction transaction, double balance) {
-        String line = new String();
+    private String line(ITransaction transaction, double balance) {
+        String line = "";
         line += "\n";
         line += britDate(transaction);
         line += " || ";
@@ -44,7 +44,7 @@ public class StatementPrinter {
         return line;
     }
 
-    private double getBalance(int index, ArrayList<Transaction> sortedTransactions) {
+    private double getBalance(int index, ArrayList<ITransaction> sortedTransactions) {
         double balance = 0;
         for (int i = sortedTransactions.size() - 1; i >= index; i--) {
             balance += sortedTransactions.get(i).getCredit();
@@ -53,9 +53,9 @@ public class StatementPrinter {
         return balance;
     }
 
-    private String britDate(Transaction transaction) {
+    private String britDate(ITransaction transaction) {
         LocalDate localDate = transaction.getDate();
-        String date = new String();
+        String date = "";
         String day = Integer.toString(localDate.getDayOfMonth());
         String month = Integer.toString(localDate.getMonthValue());
         String year = Integer.toString(localDate.getYear());
@@ -79,12 +79,12 @@ public class StatementPrinter {
         }
     }
 
-    private ArrayList<Transaction> sort(ArrayList<Transaction> transactions) {
+    private ArrayList<ITransaction> sort(ArrayList<ITransaction> transactions) {
         return reverse(transactions);
     }
 
-    private ArrayList<Transaction> reverse(ArrayList<Transaction> transactions) {
-        ArrayList<Transaction> reverseTransactions = new ArrayList<>();
+    private ArrayList<ITransaction> reverse(ArrayList<ITransaction> transactions) {
+        ArrayList<ITransaction> reverseTransactions = new ArrayList<>();
         for (int i = transactions.size(); i > 0; i--) {
             reverseTransactions.add(transactions.get(i - 1));
         }
@@ -92,10 +92,10 @@ public class StatementPrinter {
     }
 
     private String combineLines(ArrayList<String> lines) {
-        String returnString = new String();
-        for (int i = 0; i < lines.size(); i++) {
-            returnString += lines.get(i);
+        StringBuilder returnString = new StringBuilder();
+        for (String line : lines) {
+            returnString.append(line);
         }
-        return returnString;
+        return returnString.toString();
     }
 }

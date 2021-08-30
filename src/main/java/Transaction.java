@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Transaction {
+public class Transaction implements ITransaction {
     private LocalDate date;
     private double credit;
     private double debit;
@@ -16,14 +16,17 @@ public class Transaction {
         }
     }
 
+    @Override
     public LocalDate getDate() {
         return this.date;
     }
 
+    @Override
     public double getCredit() {
         return this.credit;
     }
 
+    @Override
     public double getDebit() {
         return this.debit;
     }

@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankAccount {
-    private ArrayList<Transaction> transactions;
+    private ArrayList<ITransaction> transactions;
     private StatementPrinter printer;
 
     public BankAccount() {
@@ -10,7 +10,7 @@ public class BankAccount {
         printer = new StatementPrinter();
     }
 
-    public ArrayList getTransactions() {
+    public ArrayList<ITransaction> getTransactions() {
         return this.transactions;
     }
 
