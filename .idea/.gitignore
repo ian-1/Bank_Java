@@ -39,3 +39,5 @@ test-splits/
 /.teamcity/target
 /gradle.ipr
 /gradle.iws
+
+/java_pid24663.hprof
