@@ -2,20 +2,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StatementPrinter {
-    private ArrayList<String> lines = new ArrayList<>();
+    private ArrayList<String> lines;
+    private final String HEADER = "date || credit || debit || balance";
+
+    public StatementPrinter() {
+        lines = new ArrayList<>();
+    }
 
     public String print(ArrayList<Transaction> transactions) {
-        lines.add("date || credit || debit || balance");
-        if (transactions.size() > 0) {
+        lines = fillLines(transactions);
+        String combinedLines = combineLines(lines);
+        lines.clear();
+        return combinedLines;
+    }
+
+    private ArrayList<String> fillLines(ArrayList<Transaction> transactions) {
+        ArrayList<String> returnLines = new ArrayList<>();
+        returnLines.add(HEADER);
+        if (!transactions.isEmpty()) {
             ArrayList<Transaction> sortedTransactions = sort(transactions);
             int i = 0;
             for (Transaction transaction : sortedTransactions) {
                 double balance = getBalance(i, sortedTransactions);
-                lines.add(line(transaction, balance));
+                returnLines.add(line(transaction, balance));
                 i += 1;
             }
         }
-        return combineLines(lines);
+        return returnLines;
     }
 
     private String line(Transaction transaction, double balance) {
@@ -79,10 +92,10 @@ public class StatementPrinter {
     }
 
     private String combineLines(ArrayList<String> lines) {
-        String PrintString = new String();
+        String returnString = new String();
         for (int i = 0; i < lines.size(); i++) {
-            PrintString += lines.get(i);
+            returnString += lines.get(i);
         }
-        return PrintString;
+        return returnString;
     }
 }

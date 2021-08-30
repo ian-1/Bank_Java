@@ -1,9 +1,14 @@
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankAccount {
-    private ArrayList<Transaction> transactions = new ArrayList<>();
+    private ArrayList<Transaction> transactions;
+    private StatementPrinter printer;
+
+    public BankAccount() {
+        transactions = new ArrayList<>();
+        printer = new StatementPrinter();
+    }
 
     public ArrayList getTransactions() {
         return this.transactions;
@@ -28,7 +33,6 @@ public class BankAccount {
     }
 
     public String generateStatement() {
-        StatementPrinter printer = new StatementPrinter();
         return printer.print(transactions);
     }
 }

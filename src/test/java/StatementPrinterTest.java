@@ -38,6 +38,21 @@ public class StatementPrinterTest {
     }
 
     @Test
+    @DisplayName("Prints statement twice")
+    void TestPrintsStatementTwice() {
+        LocalDate date = LocalDate.of(2000,1,1);
+        Transaction transaction = new Transaction(1,TransactionType.CREDIT, date);
+        transactions.add(transaction);
+        String lineOne = "date || credit || debit || balance\n";
+        String lineTwo = "01/01/2000 || 1.00 || - || 1.00";
+        String expectation = lineOne + lineTwo;
+        String result = subject.print(transactions);
+        assertEquals(expectation, result);
+        String resultTwo = subject.print(transactions);
+        assertEquals(expectation, resultTwo);
+    }
+
+    @Test
     @DisplayName("Prints statement for two credit transactions")
     void TestPrintsStatementForTwoCreditTransactions() {
         LocalDate date = LocalDate.of(2000,1,1);
